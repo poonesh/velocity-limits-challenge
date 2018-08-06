@@ -5,7 +5,7 @@ class Date():
     """
     Creates a Date object.
     """
-    def __init__(self, year=0, month=0, day=0):
+    def __init__(self, year=1970, month=1, day=1):
         self.year = year
         self.month = month
         self.day = day
