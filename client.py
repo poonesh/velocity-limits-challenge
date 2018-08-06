@@ -37,10 +37,10 @@ class Client():
         self.loadamount_currentday += load_amount
         self.num_loads_currentday += 1
 
-    def initiate_weekly_load(self, load_amount, load_date):
+    def initiate_weekly_load(self, load_date):
         date = Date()
         date.set_from_string(load_date)
-        if date.is_different_week(load_date):
+        if self.last_load_date.is_different_week(date):
             self.loadamount_currentweek = 0         
 
     def check_weekly_load_exceeded(self, load_amount):

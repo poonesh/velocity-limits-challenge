@@ -89,6 +89,29 @@ class Client_Test(unittest.TestCase):
 
 		self.assertEqual(client.check_daily_load_exceeded(load_amount), True)
 
+	# tests for initiate_weekly_load
+	def test_initiate_weekly_load_same_week(self):
+		client = Client(100)
+		last_load_date = Date(2018, 8, 2)
+		client.last_load_date = last_load_date
+		client.loadamount_currentweek = 15000
+		load_date = "2018-08-05"
+		client.initiate_weekly_load(load_date)
+
+		self.assertEqual(client.loadamount_currentweek, 15000)
+
+	def test_initiate_weekly_load_different_week(self):
+		client = Client(100)
+		last_load_date = Date(2018, 8, 2)
+		client.last_load_date = last_load_date
+		client.loadamount_currentweek = 15000
+		load_date = "2018-08-06"
+		client.initiate_weekly_load(load_date)
+
+		self.assertEqual(client.loadamount_currentweek, 0)
+
+
+
 
 
 
