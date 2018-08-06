@@ -110,6 +110,16 @@ class Client_Test(unittest.TestCase):
 
 		self.assertEqual(client.loadamount_currentweek, 0)
 
+	# tests for update_weekly_load
+	def test_update_weekly_load_same_week(self):
+		client = Client(100)
+		client.loadamount_currentweek = 5000
+		load_amount = 10000
+		client.update_weekly_load(load_amount)
+
+		self.assertEqual(client.loadamount_currentweek, 15000)
+
+
 
 
 

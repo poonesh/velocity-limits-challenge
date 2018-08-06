@@ -50,7 +50,7 @@ class Client():
             return False
         return True
 
-    def update_weekly_load(self, load_amount, load_date):
+    def update_weekly_load(self, load_amount):
         self.loadamount_currentweek += load_amount
 
 
