@@ -1,6 +1,6 @@
 from collections import deque
-from date import Date
-from time import Time
+from vlc_date import Date
+from vlc_time import Time
 
 class Client():
     """
