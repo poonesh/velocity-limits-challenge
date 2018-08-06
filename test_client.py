@@ -3,7 +3,8 @@ from client import Client
 from vlc_date import Date
 
 class Client_Test(unittest.TestCase):
-
+    
+    # tests for initiate_daily_load method
 	def test_initiate_daily_load_same_day(self):
 		client = Client(100)
 		date1 = Date(2018, 8, 6)
@@ -50,7 +51,14 @@ class Client_Test(unittest.TestCase):
 		self.assertEqual(client.loadamount_currentday, 0)
 		self.assertEqual(client.num_loads_currentday, 0)
 
+	# tests for update_daily_load
+	def test_update_daily_load(self):
+		client = Client(100)
+		load_amount = 2000
+		client.update_daily_load(load_amount)
 
+		self.assertEqual(client.loadamount_currentday, 2000)
+		self.assertEqual(client.num_loads_currentday, 1)
 
 
 

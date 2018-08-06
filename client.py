@@ -33,7 +33,7 @@ class Client():
             return False
         return True
 
-    def update_daily_load(self, load_amount, load_date):
+    def update_daily_load(self, load_amount):
         self.loadamount_currentday += load_amount
         self.num_loads_currentday += 1
 
