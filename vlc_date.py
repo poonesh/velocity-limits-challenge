@@ -3,7 +3,7 @@ import datetime
 
 class Date():
     """
-    This class creates a Date object.
+    Creates a Date object.
     """
     def __init__(self, year=0, month=0, day=0):
         self.year = year
@@ -12,7 +12,7 @@ class Date():
 
     def set_from_string(self, string):
         """
-        This method updates the year, month and day of the class object given a date in 
+        Updates the year, month and day of the class object given a date in 
         the format of "year-month-day".
         """
         self.year = int(string[0:4])
@@ -21,7 +21,7 @@ class Date():
 
     def is_different_date(self, other):
         """
-        This method checks if a given date(other) is different from the date object.
+        Checks if a given date(other) is different from the date object.
         """
         year = self.year == other.year
         month = self.month == other.month
@@ -32,7 +32,7 @@ class Date():
 
     def is_different_week(self, other):
         """
-        This method checks if a given date(other) is in a different week of the object date.
+        Checks if a given date(other) is in a different week of the object date.
         The parameter other passed to the method is assumed to be a future day.
         """
         day = datetime.datetime(self.year, self.month, self.day)

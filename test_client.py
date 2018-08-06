@@ -134,6 +134,8 @@ class Client_Test(unittest.TestCase):
 
 		self.assertEqual(client.check_weekly_load_exceeded(load_amount), False)
 
+	# tests for load method
+
 
 if __name__ == '__main__':
 	unittest.main()
