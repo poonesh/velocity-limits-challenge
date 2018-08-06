@@ -1,9 +1,10 @@
 from collections import deque
 from vlc_date import Date
-from vlc_time import Time
+
 
 class Client():
     """
+    This class creates a Client object with all the features of an account.
     """
     def __init__(self, client_ID):
         self.client_id = client_ID
@@ -15,11 +16,11 @@ class Client():
         self.loadamount_currentday = 0
         self.loadamount_currentweek = 0
 
-    def initiate_daily_load(self, load_amount, load_date):
+    def initiate_daily_load(self, load_date):
         date = Date()
         date.set_from_string(load_date)
-        if self.last_load_date is None or date.is_different_date(load_date):
-            self.last_load_date = load_date
+        if self.last_load_date is None or self.last_load_date.is_different_date(date):
+            self.last_load_date = date
             self.loadamount_currentday = 0
             self.num_loads_currentday = 0
 

@@ -15,9 +15,9 @@ class Date():
         This method updates the year, month and day of the class object given a date in 
         the format of "year-month-day".
         """
-        self.year = date[0:4]
-        self.month = date[5:7]
-        self.day = date[8:10]
+        self.year = int(string[0:4])
+        self.month = int(string[5:7])
+        self.day = int(string[8:10])
 
     def is_different_date(self, other):
         """

@@ -14,6 +14,14 @@ class Date_Test(unittest.TestCase):
 		result2 = date3.is_different_date(date4)
 		self.assertIs(result2, False)
 
+	def test_set_from_string(self):
+		date1 = Date()
+		date_string = "2018-08-05"
+		date1.set_from_string(date_string)
+		self.assertEqual(date1.year, 2018)
+		self.assertEqual(date1.month, 8)
+		self.assertEqual(date1.day, 5)
+
 	def test_is_different_week(self):
 		date1 = Date(2018, 8, 5)
 		date2 = Date(2018, 8, 6)
