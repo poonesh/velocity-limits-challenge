@@ -51,7 +51,7 @@ class Client_Test(unittest.TestCase):
 		self.assertEqual(client.loadamount_currentday, 0)
 		self.assertEqual(client.num_loads_currentday, 0)
 
-	# tests for update_daily_load
+	# tests for update_daily_load method
 	def test_update_daily_load(self):
 		client = Client(100)
 		load_amount = 2000
@@ -59,6 +59,35 @@ class Client_Test(unittest.TestCase):
 
 		self.assertEqual(client.loadamount_currentday, 2000)
 		self.assertEqual(client.num_loads_currentday, 1)
+
+	# tests for check_daily_load_exceeded method
+	def test_daily_load_exceeded_overload(self):
+		client = Client(100)
+		load_amount = 5005
+
+		self.assertEqual(client.check_daily_load_exceeded(load_amount), True)
+
+	def test_daily_load_exceeded_underload(self):
+		client = Client(100)
+		load_amount = 4000
+
+		self.assertEqual(client.check_daily_load_exceeded(load_amount), False)
+
+	def test_daily_load_exceeded_over_over_load_capacity(self):
+		client = Client(100)
+		client.loadamount_currentday = 4000
+		client.num_loads_currentday = 1
+		load_amount = 1500
+
+		self.assertEqual(client.check_daily_load_exceeded(load_amount), True)
+
+	def test_daily_load_exceeded_over_num_loads(self):
+		client = Client(100)
+		client.loadamount_currentday = 4000
+		client.num_loads_currentday = 4
+		load_amount = 1000
+
+		self.assertEqual(client.check_daily_load_exceeded(load_amount), True)
 
 
 

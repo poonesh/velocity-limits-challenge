@@ -26,12 +26,12 @@ class Client():
 
     def check_daily_load_exceeded(self, load_amount):
         if load_amount > self.max_daily_load:
-            return False
+            return True
         if self.max_daily_load - self.loadamount_currentday < load_amount:
-            return False
+            return True
         if self.num_loads_currentday > self.max_num_load_daily:
-            return False
-        return True
+            return True
+        return False
 
     def update_daily_load(self, load_amount):
         self.loadamount_currentday += load_amount
@@ -43,7 +43,7 @@ class Client():
         if date.is_different_week(load_date):
             self.loadamount_currentweek = 0         
 
-    def weekly_load_exceeded(self, load_amount):
+    def check_weekly_load_exceeded(self, load_amount):
         if load_amount > self.max_weekly_load:
             return False
         if self.max_weekly_load - self.loadamount_currentweek < load_amount:
@@ -58,7 +58,7 @@ class Client():
     def load(self, load_amount, load_date):
         A = self.check_daily_load_exceeded(load_amount)
         B = self.check_weekly_load_exceeded(load_amount)
-        if A and B:
+        if not A and not B:
             self.initiate_daily_load(load_amount, load_date)
             self.update_daily_load(load_amount, load_date)
             self.initate_weekly_load(load_amount, load_date)
