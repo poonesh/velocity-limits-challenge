@@ -45,10 +45,10 @@ class Client():
 
     def check_weekly_load_exceeded(self, load_amount):
         if load_amount > self.max_weekly_load:
-            return False
+            return True
         if self.max_weekly_load - self.loadamount_currentweek < load_amount:
-            return False
-        return True
+            return True
+        return False
 
     def update_weekly_load(self, load_amount):
         self.loadamount_currentweek += load_amount

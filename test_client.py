@@ -110,7 +110,7 @@ class Client_Test(unittest.TestCase):
 
 		self.assertEqual(client.loadamount_currentweek, 0)
 
-	# tests for update_weekly_load
+	# tests for update_weekly_load method
 	def test_update_weekly_load_same_week(self):
 		client = Client(100)
 		client.loadamount_currentweek = 5000
@@ -119,10 +119,20 @@ class Client_Test(unittest.TestCase):
 
 		self.assertEqual(client.loadamount_currentweek, 15000)
 
+	# tests for check_weekly_load_exceeded
+	def test_check_weekly_load_exceeded_over_load_capacity(self):
+		client = Client(100)
+		client.loadamount_currentweek = 10000
+		load_amount = 11000
 
+		self.assertEqual(client.check_weekly_load_exceeded(load_amount), True)
 
+	def test_check_weekly_load_exceeded_underload(self):
+		client = Client(100)
+		client.loadamount_currentweek = 5000
+		load_amount = 11000
 
-
+		self.assertEqual(client.check_weekly_load_exceeded(load_amount), False)
 
 
 if __name__ == '__main__':
