@@ -2,34 +2,46 @@ import json
 from client import Client
 
 def loader(filename):
-	"""
-	"""
+    """
+    Reads the input file and register the loads based on the criteria.
+    """
     clients = {}
-    load_ids = set()
+    customer_load_ids = {}
+    output = open('result.txt', 'w')
     with open(filename) as f:
         data = f.readlines()
-        for i in range(2):
+        for i in range(len(data)):
             load_data = json.loads(data[i])
             load_id = load_data["id"]
-            if load_id not in load_ids:
-                load_ids.add(load_id)
-                customer_id = load_data["customer_id"]
-                load_amount = load_data["load_amount"]
-                date, time = load_data["time"][0:10], load_data["time"][11:19]
-                print date, time
-
+            customer_id = load_data["customer_id"]
+            load_amount = float(load_data["load_amount"][1::])
+            load_date = load_data["time"][0:10]
+            if customer_id not in customer_load_ids:
+                customer_load_ids[customer_id] = set()
+            
+            dic = {}
+            # ensure this is not a duplicate load_id for the same customer
+            if load_id not in customer_load_ids[customer_id]:
+                customer_load_ids[customer_id].add(load_id)
                 if customer_id not in clients:
                     client = Client(customer_id)
                     clients[customer_id] = client
-                print clients
-    #             A = clients[customer_id].daily_load_exceeded(load_amount, time)
-    #             B = clients[customer_id].weekly_load_exceeded(load_amount, time)
-    #             C = clients[customer_id].max_num_load_daily(load_amount, time)
-
-    #             if(A and B and C):
-    #                 print True
-    #             print False
-
+                else:
+                    client = clients[customer_id]
+                
+                if client.load(load_amount, load_date):
+                    dic["accepted"] = True
+                    
+                else:
+                    dic["accepted"] = False
+                dic["id"] = load_id
+                dic["customer_id"] = customer_id
+                if i == len(data)-1:
+                    output.write(json.dumps(dic))
+                else:
+                    output.write(json.dumps(dic)+'\n')
+    
+    output.close()
 
 if __name__ == '__main__':
 	loader('./Challenge/input.txt')
